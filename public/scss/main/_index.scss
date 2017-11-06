@@ -1,0 +1,198 @@
+@import 'variables';
+@import 'mixins';
+@import 'general';
+@import 'errors';
+@import 'starfield';
+@import 'animations';
+
+html,
+body {
+    overflow: auto;
+}
+
+header {
+    height: 100px;
+    background: #151515;
+}
+
+#body {
+    position: relative;
+        z-index: 0;
+    background-color: black;
+}
+
+#main-wrapper {
+    position: relative;
+        z-index: 1;
+    min-width: 650px;
+}
+
+#upper-container {
+    height: 200px;
+    background-image: url("/assets/space2.jpg");
+    background-size: cover;
+}
+
+#main-container {
+    position: relative;
+        z-index: 1;
+}
+
+#bottom-container {
+    min-height: 800px;
+    background-attachment: fixed;
+}
+
+#logo-container {
+    margin: auto;
+    margin-top: 200px;
+    text-align: center;
+}
+
+#view {
+    padding: 10px 0;
+}
+
+#logo2 {
+    position: relative;
+    width: 500px;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+#navbar {
+    margin: 0;
+    background: #151515;
+    border: none;
+}
+
+#navbar3 {
+    float: right;
+    width: 65%;
+}
+
+#nav-content-wrap {
+    width: 1280px;
+    margin: 33px auto 0;
+    padding: 0 40px;
+}
+
+@media (max-width: 1280px) {
+    #nav-content-wrap {
+        width: 100%;
+        padding: 0 20px;
+    }
+}
+
+#navbar-Ul li a {
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 150%;
+}
+
+#volume-control {
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+#welcome-message-navbar {
+    display: inline-block;
+    color: white;
+}
+
+@media (max-width: 1000px) {
+    #welcome-message-navbar {
+        display: none;
+    }
+
+    #navbar3 {
+        width: 80%;
+    }
+}
+
+#popup-container {
+    content: '';
+    position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 99999;
+    width: 100%;
+    min-height: 1000px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+
+#popup {
+    width: 50%;
+    min-width: 420px;
+    margin: auto;
+    margin-top: 300px;
+    background: #aaa;
+    border-radius: 10px;
+    @include white-border;
+}
+
+#popup-header {
+    position: relative;
+    color: #fff;
+    font-size: 35px;
+    text-align: center;
+    border-bottom: 2px solid $lighterblack;
+
+    i {
+        display: inline-block;
+        top: -15px;
+        font-size: 20px;
+        cursor: pointer;
+
+        &:hover {
+            color: $primary-red;
+        }
+    }
+}
+
+#popup-body {
+    width: 80%;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 10px;
+    @include white-border;
+}
+
+.dropdown-menu {
+    font-size: 11px;
+    background: $lightwhite;
+    border-radius: 5px;
+}
+
+.img-responsive {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+}
+
+.affix {
+    top: 0;
+    width: 100%;
+}
+
+.active {
+    color: #fff !important;
+    text-decoration: underline !important;
+}
+
+.in-shadow {
+    position: relative;
+    opacity: 0.5;
+}
+
+.container {
+    position: relative;
+        z-index: 103;
+}
+
+.navbar-header {
+    float: right;
+    width: 50%;
+}

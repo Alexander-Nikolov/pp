@@ -1,0 +1,43 @@
+.error-message,
+.success-message {
+    width: 85%;
+    margin: 0 auto;
+    border-radius: 10px;
+    transition: all linear 0.3s;
+}
+
+.error-message {
+    background-color: $primary-red;
+}
+
+.success-message {
+    background-color: rgba(100, 200, 0, 0.5);
+}
+
+.user-info-messages {
+    width: 95%;
+    margin: 0 auto;
+    color: #fff;
+    text-align: center;
+    @include border-side-radius(0, 10px, 10px, 0);
+}
+
+.input-error,
+.server-errors {
+    margin: 0 auto;
+    padding: 2px;
+    color: #fff;
+    text-align: center;
+    background-color: $primary-red;
+    transition: all linear 0.3s;
+    @include border-side-radius(0, 10px, 10px, 0);
+}
+
+.input-error {
+    width: 95%;
+    font-size: 10px;
+}
+
+.error-box {
+    height: 70px;
+}

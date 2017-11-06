@@ -1,0 +1,8 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    background: #000 url("/assets/space4.jpg") no-repeat;
+}

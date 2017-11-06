@@ -1,0 +1,164 @@
+@import url(http://fonts.googleapis.com/css?family=Orbitron:700);
+
+html {
+    overflow-x: hidden;
+}
+
+input {
+    display: inline-block;
+    text-align: center;
+}
+
+label {
+    color: white;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+table {
+    position: relative;
+        z-index: 100;
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+
+    th,
+    td {
+        padding: 15px;
+        border-bottom: 2px solid rgba(0, 0, 0, 0.8);
+    }
+
+    th {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    td {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+}
+
+input,
+input::-webkit-input-placeholder {
+    padding-top: 3px;
+    font-size: 11px;
+}
+
+.view-container {
+    position: relative;
+        z-index: 1;
+    width: 1280px;
+    margin: 0 auto;
+    padding: 10px 40px;
+    background: $lighterwhite;
+    border-radius: 10px;
+    @include white-border;
+}
+
+@media (max-width: 1280px) {
+    .view-container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .view-container {
+        padding: 20px;
+    }
+}
+
+.main-center {
+    max-width: 330px;
+    margin: 0 auto;
+    padding: 40px 40px;
+}
+
+.hide {
+    visibility: hidden;
+}
+
+.basic-button {
+    min-width: 150px;
+    padding: 8px 0;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 5px;
+
+    &:hover {
+        box-shadow: 1px 1px 25px $lightwhite;
+        outline: none;
+    }
+}
+
+.table-td {
+    color: $lighterblack;
+    font-size: 25px;
+    font-family: sans-serif;
+    text-align: center;
+    text-shadow: 1px 1px 21px $lighterblack;
+}
+
+@media (max-width: 900px) {
+    .table-td {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 750px) {
+    .table-td {
+        font-size: 15px;
+    }
+}
+
+.table-headers:hover {
+    cursor: pointer;
+    text-shadow: 2px 2px 21px white;
+}
+
+.page-control {
+    text-align: center;
+
+    span {
+        display: inline-block;
+        padding: 10px;
+        font-size: 20px;
+    }
+}
+
+.delete-box {
+    position: absolute;
+        top: 5px;
+        right: 5px;
+    display: none;
+    font-size: 15px;
+}
+
+.scroll {
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        background: $lightwhite;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    &::-webkit-scrollbar-thumb:window-inactive {
+        background: $lighterwhite;
+    }
+}

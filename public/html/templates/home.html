@@ -1,0 +1,38 @@
+<div class="view-container" ng-controller="chatController">
+    <div id="chat-header">
+        <button class="basic-button" ng-click="changeChatView()" ng-show="isInPrivateChat">Back</button>
+        <h2 ng-bind-html="trustAsHtml(title)"></h2>
+    </div>
+
+    <div id="chat-container">
+        <div id="info-inchat" class="scroll">
+            <h4 ng-class="{unread: globalChatUnread}" ng-click="changeChatView()">Lobby
+                <span class="unread-indicator" ng-show="globalChatUnread">{{globalChatUnreadMessages}}</span></h4>
+            <p class="inchat-name"
+               ng-repeat="user in usersArray | orderBy:'hasUnread':true"
+               ng-class="{unread: user.hasUnread}"
+               ng-style="{color: '#' + user.color}"
+               ng-click="chatClient.chatWithUser(user.username)">{{user.username}}
+                <span class="unread-indicator" ng-show="user.hasUnread">{{user.unreadMessages}}</span>
+            </p>
+        </div>
+        <div id="chat-main">
+            <div id="chat" class="scroll" ng-bind-html="trustAsHtml(messages)">
+            </div>
+            <div id="user-bubble">
+                <div id="user-chat-avatar">
+                    <img ng-src="{{userData[0].avatarURL}}" alt="user avatar">
+                </div>
+                <div id="user-chat-message">
+                    <textarea class="scroll"
+                              maxlength="60"
+                              placeholder="Send message..."
+                              ng-model="message"
+                              ng-keydown="sendMessage($event)">
+                    </textarea>
+                    <i class="fa fa-comment" ng-click="sendMessage($event)"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

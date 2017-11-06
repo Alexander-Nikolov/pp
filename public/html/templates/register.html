@@ -1,0 +1,133 @@
+<div id="registration-wrapper" class="container">
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <img id="logo" class="img-responsive logo-small" src="/assets/logo.png" alt="game logo">
+            </div>
+        </div>
+        <div class="form-cover container-small center-block">
+            <div class="main-login main-center">
+                <form class="form-horizontal" name="registerForm" ng-submit="submit($event)">
+                    <div class="form-group">
+                        <label for="name" class="cols-sm-2 control-label">Your Name</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                <input id="name"
+                                       class="form-control"
+                                       name="name"
+                                       type="text"
+                                       placeholder="Enter your Name"
+                                       ng-model="userInfo.name"
+                                       ng-model-options="{ updateOn: 'default blur', debounce: { default: 1500, blur: 0 } }"
+                                       name-validation
+                                />
+                            </div>
+                        </div>
+                        <p class="input-error" ng-show="!registerForm.name.$valid">The name is not valid</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="cols-sm-2 control-label">Your Email</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope fa"
+                                                                   aria-hidden="true"></i></span>
+                                <input id="email"
+                                       type="text"
+                                       class="form-control"
+                                       name="email"
+                                       placeholder="Enter your Email"
+                                       ng-model="userInfo.email"
+                                       ng-model-options="{ updateOn: 'default blur', debounce: { default: 1500, blur: 0 } }"
+                                       email-validation
+                                />
+                            </div>
+                        </div>
+                        <p class="input-error" ng-show="!registerForm.email.$valid">The email is invalid</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="cols-sm-2 control-label">Username</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                <input id="username"
+                                       class="form-control"
+                                       type="text"
+                                       name="username"
+                                       placeholder="Enter your Username"
+                                       ng-model="userInfo.username"
+                                       ng-model-options="{ updateOn: 'default blur', debounce: { default: 1500, blur: 0 } }"
+                                       username-validation
+                                />
+                            </div>
+                        </div>
+                        <p class="input-error" ng-show="!registerForm.username.$valid">Username is invalid</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="cols-sm-2 control-label">Password</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg"
+                                                                   aria-hidden="true"></i></span>
+                                <input id="password"
+                                       class="form-control"
+                                       type="password"
+                                       name="password"
+                                       placeholder="Enter your Password"
+                                       ng-model="userInfo.password"
+                                       ng-model-options="{ updateOn: 'default blur', debounce: { default: 1500, blur: 0 } }"
+                                       password-validation
+                                />
+                            </div>
+                        </div>
+                        <p class="input-error" ng-show="!registerForm.password.$valid">Password is invalid</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordConfirm" class="cols-sm-2 control-label">Confirm Password</label>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-lock fa-lg"
+                                                                   aria-hidden="true"></i></span>
+                                <input id="passwordConfirm"
+                                       class="form-control"
+                                       type="password"
+                                       name="confirm"
+                                       placeholder="Confirm your Password"
+                                       ng-model="userInfo.confirm"
+                                       ng-model-options="{ updateOn: 'default blur', debounce: { default: 1500, blur: 0 } }"
+                                />
+                            </div>
+                        </div>
+                        <p class="input-error" ng-show="userInfo.password !== userInfo.confirm &&
+                         userInfo.confirm.length > 0">Password does not match</p>
+                    </div>
+                    <div class="error-box">
+                        <div>
+                            <button type="submit"
+                                    class="btn btn-lg btn-block reg-log-button">
+                                Register
+                            </button>
+                        </div>
+                        <div class="server-errors"
+                             ng-show="messageHandle.messages.hasEmptyField ||
+                              messageHandle.messages.invalidData ||
+                              messageHandle.messages.isEmailTaken ||
+                              messageHandle.messages.isUsernameTaken">
+                            <p class="input-error" ng-show="messageHandle.messages.hasEmptyField">
+                                Can't submit the form with empty fields</p>
+                            <p class="input-error" ng-show="messageHandle.messages.invalidData">
+                                Invalid data submited</p>
+                            <p class="input-error" ng-show="messageHandle.messages.isEmailTaken">
+                                E-mail is already taken</p>
+                            <p class="input-error" ng-show="messageHandle.messages.isUsernameTaken">
+                                Username is already taken</p>
+                        </div>
+                    </div>
+                    <div>
+                        <a class="reg-log-form-link" href="/login">Log in</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

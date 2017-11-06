@@ -1,0 +1,91 @@
+<div id="messages-container" class="view-container">
+    <div id="messages-header">
+        <button id="message-nav" class="basic-button" ng-click="changeView()">{{buttonText}}</button>
+        <h2 ng-show="view == 'inbox'">Inbox</h2>
+        <span class="search-input" ng-show="view === 'inbox'"><i class="fa fa-search" aria-hidden="true"></i>
+            <input title="search inbox" placeholder="find message..." ng-model="inboxFilter" />
+        </span>
+    </div>
+    <div>
+        <div ng-show="view === 'inbox'">
+            <table id="messages-table">
+                <tr>
+                    <th class="table-td table-headers" ng-click="changeSortField('sender')"><span>Sender</span><i
+                            ng-class="{'fa': inboxOrderBy === 'sender',
+                                  'fa-arrow-up':  !isSortReversed,
+                                  'fa-arrow-down':  isSortReversed,
+                                  'hide': inboxOrderBy !== 'sender'}"
+                    ></i></th>
+                    <th class="table-td table-headers" ng-click="changeSortField('subject')"><span>Subject</span><i
+                            ng-class="{'fa': inboxOrderBy === 'subject',
+                                  'fa-arrow-up':  !isSortReversed,
+                                  'fa-arrow-down':  isSortReversed,
+                                  'hide': inboxOrderBy !== 'subject'}"
+                    ></i></th>
+                    <th class="table-td table-headers" ng-click="changeSortField('-date')"><span>Date</span><i
+                            ng-class="{'fa': inboxOrderBy === '-date',
+                                  'fa-arrow-up':  !isSortReversed,
+                                  'fa-arrow-down':  isSortReversed,
+                                  'hide': inboxOrderBy !== '-date'}"
+                    ></i></th>
+                </tr>
+                <tr data-ng-repeat="message in messages | orderBy: inboxOrderBy:isSortReversed | filter : inboxFilter | startFrom:currentPage*pageSize | limitTo:pageSize"
+                    ng-click="showMessage(message)">
+                    <td class="table-td messages-th">{{ message.sender }}</td>
+                    <td class="table-td messages-th">{{ message.subject }}</td>
+                    <td class="table-td messages-th">{{ message.date | date : format : medium}}<i class="fa fa-times delete-box" ng-click="deleteMessage(message)"></i></td>
+                </tr>
+            </table>
+            <div class="page-control" ng-show="hasInfo">
+                <button class="basic-button" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+                    Previous
+                </button>
+                <span>{{currentPage+1}}/{{numberOfPages()}}</span>
+                <button class="basic-button"
+                        ng-disabled="currentPage >= getData().length/pageSize - 1"
+                        ng-click="currentPage=currentPage+1">
+                    Next
+                </button>
+            </div>
+        </div>
+        <div id="user-message-container" ng-show="view === 'show message'">
+            <h3>From: {{userInboxMessage.sender}}</h3>
+            <p>{{userInboxMessage.message}}</p>
+            <button class="basic-button" ng-click="reply(userInboxMessage.sender, userInboxMessage.subject)">Reply
+            </button>
+        </div>
+    </div>
+    <section id="message-send" ng-show="view === 'send message'">
+        <form class="form-horizontal" name="sendMessage" ng-submit="send($event)">
+            <div id="message-username">
+                <input type="text" name="name" placeholder="Send to..." ng-class="{hide: !isChangingUser}"
+                       ng-blur="changeUser();"
+                       ng-model="messageTo" username-validation />
+                <p ng-class="{hide: isChangingUser}"
+                   ng-click="changeUser();"
+                   ng-bind="messageTo"></p>
+                <i class="fa fa-pencil"
+                   ng-click="changeUser();"
+                   ng-show="messageTo === 'Send to...'"></i>
+            </div>
+
+            <input id="subject" class="form-group" type="text" name="subject" placeholder="Subject"
+                   ng-model="subject" />
+            <textarea id="message-body"
+                      ng-model="message"
+                      name="message-mail"
+                      placeholder="Enter your message here"
+                      rows="7"
+                      cols="50"
+            ></textarea>
+            <input id="message-to-user-submit" class="btn btn-custom btn-lg btn-block" type="submit" value="Send">;
+        </form>
+        <div class="user-info-messages">
+            <p ng-show="messageHandle.messages.hasEmptyField" class="error-message">Can't send a message with invalid
+                input</p>
+            <p ng-show="messageHandle.messages.isUserExisting" class="error-message">User doesn't exist</p>
+            <p ng-show="messageHandle.messages.invalidData" class="error-message">Ivalid data sent</p>
+            <p ng-show="messageHandle.messages.hasMessageSent" class="success-message">Message sent</p>
+        </div>
+    </section>
+</div>

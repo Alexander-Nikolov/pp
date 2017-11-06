@@ -1,0 +1,61 @@
+<div class="panel-heading">
+    <div class="panel-title text-center">
+        <img id="logo" class="img-responsive" src="/assets/logo.png" alt="game logo">
+    </div>
+</div>
+<section id="login">
+    <div class="container">
+        <div class="row center-row">
+            <div class="form-cover">
+                <div class="form-wrap">
+                    <form name="loginForm"
+                          role="form"
+                          autocomplete="off"
+                          ng-submit="submit($event)"
+                    >
+                        <div class="form-group">
+                            <label for="username-login" class="sr-only">Username</label>
+                            <input id="username-login"
+                                   class="form-control"
+                                   type="text"
+                                   name="usernameLogin"
+                                   placeholder="Username"
+                                   username-validation
+                                   ng-model="userInfo.username"
+                                   ng-model-options="{ updateOn: 'default blur', debounce: { default: 1500, blur: 0 } }"
+                            >
+                            <p class="input-error" ng-show="!loginForm.usernameLogin.$valid">Username is invalid</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="key" class="sr-only">Password</label>
+                            <input id="key"
+                                   class="form-control"
+                                   type="password"
+                                   name="key"
+                                   placeholder="Password"
+                                   ng-model-options="{ updateOn: 'default blur', debounce: { default: 1500, blur: 0 } }"
+                                   ng-model="userInfo.password"
+                                   password-validation
+                            />
+                            <p class="input-error" ng-show="!loginForm.key.$valid">Password is invalid</p>
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-lg btn-block reg-log-button"
+                                   type="submit"
+                                   value="Log in"
+                            />
+                            <p class="input-error" ng-show="messageHandle.messages.hasEmptyField">
+                                Can't submit the form with empty fields</p>
+                            <p class="input-error" ng-show="messageHandle.messages.hasServerError">Wrong password or
+                                username</p>
+                        </div>
+                    </form>
+                    <a href="/register" class="reg-log-form-link">Register</a>
+                    <a href="" class="reg-log-form-link">Forgot your password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

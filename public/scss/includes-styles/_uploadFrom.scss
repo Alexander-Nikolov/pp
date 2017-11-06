@@ -1,0 +1,76 @@
+#dropbox {
+    width: 100%;
+    height: 200px;
+
+    label {
+        width: 100%;
+        padding-bottom: 10px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    &>span {
+        display: block;
+        width: 50%;
+        height: 150px;
+        margin: auto;
+        padding: 5px;
+        border-radius: 10px;
+        overflow: hidden;
+
+        span {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            
+            i {
+                position: absolute;
+                    top: 50px;
+                    left: 46%;
+                    z-index: 1;
+                display: inline-block;
+                font-size: 30px;
+
+                @media (max-width: 1000px) {
+                    left: 44%;
+                }
+            }
+
+            &:hover i {
+                color: #fff;
+            }
+
+            input {
+                position: relative;
+                    z-index: 200;
+                display: block;
+                width: 100%;
+                height: 150px;
+                opacity: 0.01;
+                cursor: pointer;
+            }
+        }
+        
+        img {
+            width: 100%;
+        }
+        
+        p {
+            color: red;
+            text-align: center;
+        }
+    }
+}
+
+#image-upload-button-container {
+    padding: 10px;
+    text-align: center;
+
+    button {
+        margin: 5px;
+    }
+}
+
+.dotted-border {
+    border: 2px dotted #fff;
+}

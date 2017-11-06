@@ -1,0 +1,196 @@
+#messages-header {
+    position: relative;
+    padding: 10px 20px;
+
+    button {
+        padding: 5px;
+        font-size: 20px;
+
+        @media (max-width: 900px) {
+            font-size: 15px;
+        }
+    }
+
+    h2 {
+        position: absolute;
+            top: -10px;
+            left: 45%;
+        color: #fff;
+        font-size: 35px;
+        text-align: center;
+
+        @media (max-width: 900px) {
+            font-size: 25px;
+        }
+    }
+}
+
+#messages-table {
+    position: relative;
+
+    th {
+        width: 33.33%;
+        & > i {
+            position: absolute;
+                top: 23px;
+            font-size: 20px;
+
+            @media (max-width: 900px) {
+                top: 18px;
+            }
+
+            @media (max-width: 750px) {
+                font-size: 15px;
+            }
+        }
+    }
+    
+    tr {
+        position: relative;
+    }
+
+    tr:hover {
+        background: $lightblack;
+        .delete-box {
+            display: inline-block;
+            padding: 5px;
+
+            &:hover {
+                color: #D21C1E;
+                font-size: 20px;
+            }
+        }
+
+
+    }
+
+    tr:first-child:hover {
+        background: $lighterwhite;
+    }
+
+    td {
+        cursor: pointer;
+    }
+    
+    td:last-child {
+        position: relative;
+    };
+}
+
+#user-message-container {
+    position: relative;
+        z-index: 10000;
+    width: 80%;
+    min-height: 200px;
+    margin: auto;
+    background: $lightwhite;
+
+    h3 {
+        padding: 20px 10px;
+    }
+
+    p {
+        padding: 5px;
+        text-indent: 50px;
+    }
+
+    button {
+        display: block;
+        margin: 40px auto;
+    }
+}
+
+#message-send {
+    border-top: 2px solid $lightwhite;
+
+    input {
+        color: #fff;
+        background: rgba(0, 0, 0, 0.6);
+
+        &::placeholder {
+            color: #fff;
+        }
+    }
+}
+
+#message-username {
+    position: relative;
+    width: 250px;
+    height: 30px;
+    margin: 20px auto 60px;
+    cursor: pointer;
+
+    input {
+        position: absolute;
+            top: 3px;
+            left: 8px;
+        width: 230px;
+        font-size: 20px;
+        border-radius: 5px;
+
+        &::placeholder {
+            padding-left: 5px;
+            font-size: 20px;
+            text-align: left;
+        }
+    }
+
+    p {
+        display: inline-block;
+        margin: 0;
+        color: #fff;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    i {
+        padding-left: 5px;
+        color: #fff;
+        font-size: 20px;
+    }
+}
+
+#message-body {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+
+    &::placeholder {
+        color: #fff;
+    }
+}
+
+#message-to {
+    color: white;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+}
+
+#subject {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    font-size: 20px;
+    text-align: center;
+}
+
+#subject::placeholder {
+    font-size: 20px;
+    text-align: center;
+}
+
+#message-to-user-submit {
+    display: block;
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 30px;
+    color: black;
+    background-color: white;
+
+    &:hover {
+        color: #000;
+        background: $lightwhite;
+    }
+}

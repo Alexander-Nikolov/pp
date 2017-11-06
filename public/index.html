@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Phinal-Phase</title>
+
+    <meta name="description" content="Multiplayer game.">
+    <meta name="keywords" content="Multiplayer game">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"
+    >
+    </script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+    <script type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"
+    >
+    </script>
+    <script type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"
+    ></script>
+    <script type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-sanitize.js"
+    ></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/build/css/app.css"/>
+
+    <base href="/">
+</head>
+<body id="body" ng-app="myApp">
+<div id="main-wrapper" ng-controller="rootController" ng-cloak>
+    <div id="upper-container" ng-if="isUiVisible">
+        <img src="/assets/logo.png" class="img-responsive" id="logo2" alt="game logo">
+    </div>
+    <div class="main-container">
+        <header ng-class="{hide: !isUiVisible}">
+            <nav id="navbar"
+                 class="navbar navbar-inverse navbar-static-top"
+                 data-spy="affix"
+                 data-offset-top="200"
+            >
+                <div id="nav-content-wrap" ng-if="isUiVisible">
+                    <h4 id="welcome-message-navbar" class="h4">Logged in as {{userData[0].username}} !</h4>
+                    <div class="navbar-header">
+                        <button type="button"
+                                class="navbar-toggle collapsed"
+                                data-toggle="collapse"
+                                data-target="#navbar3">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div id="volume-control">
+                        <button id="volume-down" class="btn btn-xs btn-danger" ng-click="audioControl('volumeDown')">
+                            <span class="glyphicon glyphicon-volume-down"></span>
+                        </button>
+                        <button id="volume-off" class="btn btn-xs btn-danger" ng-click="audioControl('stop')">
+                            <span class="glyphicon glyphicon-volume-off"></span>
+                        </button>
+                        <button id="volume-up" class="btn btn-xs btn-danger" ng-click="audioControl('volumeUp')">
+                            <span class="glyphicon glyphicon-volume-up"></span>
+                        </button>
+                    </div>
+                    <div id="navbar3" class="navbar-collapse collapse">
+                        <ul id="navbar-Ul" class="nav navbar-nav navbar-right">
+                            <li><a href="/home" ng-class="{active: isActive('/home')}">Home</a></li>
+                            <li><a href="/ranklist" ng-class="{active: isActive('/ranklist')}">Ranklist</a></li>
+                            <li><a href="/pp" target="_self" ng-class="{active: isActive('/pp')}">Game</a></li>
+                            <li><a href="/messages" ng-class="{active: isActive('/messages')}">Messages</a></li>
+                            <li class="dropdown">
+                                <a href=""
+                                   class="dropdown-toggle"
+                                   data-toggle="dropdown"
+                                   role="button"
+                                   aria-expanded="false"
+                                >My Account <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/settings">Account Settings</a></li>
+                                    <li><a href="" ng-click="logout($event)">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div id="bottom-container" ng-style="background">
+            <div>
+                <div id="logo-container" ng-show="isLoading">
+                    <img src="assets/moonLoading.gif" alt="loading gif">
+                </div>
+                <div id="popup-container" ng-show="hasPopup" ng-class="classForPopup" ng-style="styleForPopup">
+                    <div id="popup">
+                        <div id="popup-header">
+                            <h2>{{popupTitle}}</h2>
+                            <i class="fa fa-times delete-box" ng-click="closePopup()"></i>
+                        </div>
+                        <div id="popup-body" ng-include="popupIncludeUrl">
+
+                        </div>
+                    </div>
+                </div>
+                <div id="view" ng-view ng-show="!isLoading">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="space">
+        <div class="stars" ng-class="{starsZoom: isUiVisible, starsZoomOut: !isUiVisible}"></div>
+        <div class="stars" ng-class="{starsZoom: isUiVisible, starsZoomOut: !isUiVisible}"></div>
+        <div class="stars" ng-class="{starsZoom: isUiVisible, starsZoomOut: !isUiVisible}"></div>
+        <div class="stars" ng-class="{starsZoom: isUiVisible, starsZoomOut: !isUiVisible}"></div>
+        <div class="stars" ng-class="{starsZoom: isUiVisible, starsZoomOut: !isUiVisible}"></div>
+        <div class="stars" ng-class="{starsZoom: isUiVisible, starsZoomOut: !isUiVisible}"></div>
+    </div>
+</div>
+
+<script src="build/js/app.js" type="text/javascript"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"
+></script>
+
+<audio id="audio" src="assets/sound/forest.ogg" loop="loop" autoplay="true"></audio>
+
+</body>
+</html>

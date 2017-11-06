@@ -1,0 +1,67 @@
+<div id="ranklist-container" class="view-container">
+    <div id="ranklist-searchbar">
+        <h2>Ranklist</h2>
+        <span class="search-input"><i class="fa fa-search" aria-hidden="true"></i>
+            <input title="search user" placeholder="search player..." ng-model="nameFilter" />
+        </span>
+    </div>
+    <div id="ranklist-table">
+        <table class="table-responsive">
+            <tr>
+                <th class="table-td">#</th>
+                <th class="table-td">Avatar</th>
+                <th class="table-td table-headers" ng-click="changeSortField('username')"><span>Username</span><i
+                        ng-class="{'fa': orderByField === 'username',
+                                  'fa-arrow-up':  !isSortReversed,
+                                  'fa-arrow-down':  isSortReversed,
+                                  'hide': orderByField !== 'username'}"
+                ></i></th>
+                <th class="table-td table-headers" ng-click="changeSortField('kills')"><span>Kills</span><i
+                        ng-class="{'fa': orderByField === 'kills',
+                                  'fa-arrow-up':  isSortReversed,
+                                  'fa-arrow-down':  !isSortReversed,
+                                  'hide': orderByField !== 'kills'}"
+                ></i></th>
+                <th class="table-td table-headers" ng-click="changeSortField('deaths')"><span>Deaths</span><i
+                        ng-class="{'fa': orderByField === 'deaths',
+                                  'fa-arrow-up':  isSortReversed,
+                                  'fa-arrow-down':  !isSortReversed,
+                                  'hide': orderByField !== 'deaths'}"
+                ></i></th>
+                <th class="table-td table-headers" ng-click="changeSortField('score')"><span>Score</span><i
+                        ng-class="{'fa': orderByField === 'score',
+                                  'fa-arrow-up':  isSortReversed,
+                                  'fa-arrow-down':  !isSortReversed,
+                                  'hide': orderByField !== 'score'}"
+                ></i></th>
+            </tr>
+            <tr ng-repeat="user in users | orderBy:orderByField:isSortReversed | filter : {username: nameFilter} | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <td class="table-td">{{ $index + 1 }}</td>
+                <td id="ranklist-avatar" class="table-td">
+                    <div class="image-container">
+                        <img ng-src="{{user.avatarURL}}" alt="user avatar">
+                    </div>
+                </td>
+                <td class="table-td ranklist-username"
+                    ng-click="sendMessageToPlayer(user.username)">
+                    {{user.username }}
+                </td>
+                <td class="table-td">{{ user.kills }}</td>
+                <td class="table-td">{{ user.deaths }}</td>
+                <td class="table-td">{{ user.score }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="page-control" ng-show="hasInfo">
+        <button class="basic-button" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+            Previous
+        </button>
+        <span>{{currentPage+1}}/{{numberOfPages()}}</span>
+        <button class="basic-button"
+                ng-disabled="currentPage >= getData().length/pageSize - 1"
+                ng-click="currentPage=currentPage+1">
+            Next</button>
+    </div>
+</div>
+
+

@@ -1,0 +1,6 @@
+{
+  "name": "Game",
+  "description": "Phaser Game",
+  "repository": "https://github.com/Alexander-Nikolov/Phinal-Phase",
+  "keywords": ["node", "express", "static"]
+}

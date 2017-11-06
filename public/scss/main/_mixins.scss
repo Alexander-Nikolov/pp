@@ -1,0 +1,23 @@
+@mixin border-side-radius($top-right: 0px, $bottom-right: 0px, $bottom-left: 0px, $top-left: 0px) {
+    border-top-right-radius: $top-right;
+    border-bottom-right-radius: $bottom-right;
+    border-bottom-left-radius: $bottom-left;
+    border-top-left-radius: $top-left;
+}
+
+@mixin border-side-make($size1:1px, $type1:solid, $color1:black,
+                        $size2:1px, $type2:solid, $color2:black,
+                        $size3:1px, $type3:solid, $color3:black,
+                        $size4:1px, $type4:solid, $color4:black) {
+    border-top: $size1 $type1 $color1;
+    border-right: $size2 $type2 $color2;
+    border-bottom: $size3 $type3 $color3;
+    border-left: $size4 $type4 $color4;
+}
+
+@mixin white-border() {
+    @include border-side-make(5px, solid, $lighterwhite,
+            1px, solid, $lighterwhite,
+            5px, solid, $lighterwhite,
+            1px, solid, $lighterwhite);
+}

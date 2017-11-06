@@ -1,0 +1,90 @@
+<div class="view-container">
+    <div id="settings-container">
+        <h3 id="panel-title">
+            Account Settings
+        </h3>
+        <div id="user-info">
+            <div id="user-avatar">
+                <img class="avatar"
+                     alt="user avatar"
+                     ng-src="{{userData[0].avatarURL}}"
+                />
+            </div>
+            <p class="settings-paragraph">Name: {{userData[0].name}}</p>
+            <p class="settings-paragraph">Email: {{userData[0].email}}</p>
+            <p class="settings-paragraph">Username: {{userData[0].username}}</p>
+            <p class="settings-paragraph">Kills: {{userData[0].kills}}</p>
+            <p class="settings-paragraph">Deaths: {{userData[0].deaths}}</p>
+            <p class="settings-paragraph">Score: {{userData[0].score}}</p>
+        </div>
+        <div id="user-info-change">
+            <form id="change-password-form" name="userSettings" ng-submit="submit($event)">
+                <h6 class="settings-heading">Change your information:</h6>
+                <p class="settings-heading">New Password:</p>
+                <div id="current-password">
+                    <input class="form-control"
+                           placeholder="Current Password"
+                           name="currentPassword"
+                           type="password"
+                           ng-model="userInfo.currPass"
+                           ng-model-options="{ updateOn: 'default blur', debounce: { default: 1500, blur: 0 } }"
+                           password-validation
+                    />
+                    <p class="input-error"
+                       ng-show="!userSettings.currentPassword.$valid"
+                    >
+                        Invalid password</p>
+                </div>
+                <div id="new-password">
+                    <input class="form-control"
+                           type="password"
+                           name="newPassword"
+                           placeholder="New Password"
+                           ng-model="userInfo.newPass"
+                           ng-model-options="{ updateOn: 'default blur', debounce: { default: 1500, blur: 0 } }"
+                           password-validation
+                    />
+                    <p ng-show="userSettings.newPassword.$touched &&
+                                                userInfo.currPass == userInfo.newPass &&
+                                                userInfo.currPass.length != 0 &&
+                                                userSettings.currentPassword.$valid"
+                       class="input-error">Can't use the same password</p>
+                    <p ng-show="!userSettings.newPassword.$valid" class="input-error">Invalid password</p>
+                </div>
+                <p class="settings-heading">New Avatar:</p>
+                <div id="change-avatar">
+                    <div id='url'>
+                        <input class="form-control"
+                               name="avatarURL"
+                               type="text"
+                               placeholder="Enter URL to your avatar"
+                               ng-model="userInfo.newAvatar"
+                               ng-model-options="{ updateOn: 'default blur', debounce: { default: 1500, blur: 0 } }"
+                               url-validation
+                        />
+                        <p ng-show="!userSettings.avatarURL.$valid && userInfo.newAvatar.length > 0"
+                           class="input-error">Invalid url</p>
+                    </div>
+                    <div id="uploadImgPopup">
+                        <button class="basic-button" ng-click="uploadImagePopup($event)">Upload</button>
+                    </div>
+                </div>
+                <input id="save-button" class="basic-button" type="submit" value="Change">
+            </form>
+            <div class="user-info-messages"
+                 ng-show="messageHandle.messages.hasEmptyField || messageHandle.messages.invalidData ||
+                                          messageHandle.messages.isCurrentPassValid || messageHandle.messages.isPassChanged ||
+                                          messageHandle.messages.isAvatarChanged">
+                <p ng-show="messageHandle.messages.hasEmptyField" class="error-message">Can't submit the
+                    form with empty fields</p>
+                <p ng-show="messageHandle.messages.invalidData" class="error-message">Invalid data send</p>
+                <p ng-show="messageHandle.messages.isCurrentPassValid" class="error-message">Current
+                    password is not valid</p>
+                <p ng-show="messageHandle.messages.isPassChanged" class="success-message">Password is
+                    changed</p>
+                <p ng-show="messageHandle.messages.isAvatarChanged" class="success-message">Avatar is
+                    changed</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div id="image-upload-container" ng-controller="formUploadController">
+    <form ng-submit="uploadImg($event)" name="imageUpload">
+        <div id="dropbox">
+            <label for="imageUpload">Select a file or drag-drop one below</label>
+            <span ng-class="{'dotted-border': !uploadme.src}">
+                <span ng-show="!uploadme.src">
+                    <i class="fa fa-upload"></i>
+                    <input id="imageUpload"
+                           type="file"
+                           name="userAvatar"
+                           accept="image/*"
+                           fileread="uploadme.src" />
+                </span>
+                <img ng-show="uploadme.src" ng-src="{{ uploadme.src }}">
+                <p ng-show="showUploadError">Invalid data</p>
+            </span>
+        </div>
+        <div id="image-upload-button-container">
+            <button class="basic-button" ng-click="cancelUpload($event)" ng-show="uploadme.src">Cancel</button>
+            <button class="basic-button" type="submit" ng-show="uploadme.src">Upload</button>
+        </div>
+    </form>
+</div>
